@@ -1,0 +1,2 @@
+# mm.quest
+Memento mori.
