@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap');
+
+html, body {
+  margin: 0;
+  padding: 0;
+
+  font-size: 12px;
+  font-family: "Pixelify Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.no-copy {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.screen {
+  width: 384px;
+  height: 384px;
+  overflow: hidden;
+  background-color: #F8F8F8;
+  border: 1px solid #E8E8E8;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-gap: 6px;
+  padding: 12px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 1px solid #E8E8E8;
+}
+
+.stat-count {
+  font-size: 2em;
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 0 12px;
+}
+
+.stat-icon {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.stat-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  font-size: 0.5em;
+}
