@@ -250,6 +250,8 @@ const reloadGame = async () => {
 }
 
 window.onload = async () => {
+  document.getElementById("reset").addEventListener("click", manualReset)
+
   resetStats()
 
   await reloadGame()
