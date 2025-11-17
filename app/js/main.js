@@ -86,10 +86,16 @@ const statsCache = {
     localStorage.setItem(`stat:${stat.id}`, count || 0)
   },
   get: (stat) => {
-    return localStorage.getItem(`stat:${stat.id}`) || 0
+    return parseInt(localStorage.getItem(`stat:${stat.id}`)) || 0
   },
-  clear: () => {
+  clear: (currentWeek) => {
+    const storedWeek = parseInt(localStorage.getItem("state:current-week"))
+    if (storedWeek === currentWeek) {
+      return
+    }
+
     localStorage.clear()
+    localStorage.setItem("state:current-week", currentWeek)
   }
 }
 
@@ -141,14 +147,92 @@ const createStatNode = (stat) => {
 const goToStats = (screen) => {
   screen.innerHTML = ""
 
+  const stats = document.createElement("div")
+  stats.className = "stats"
+
   STATS.forEach((stat) => {
     const statNode = createStatNode(stat)
-    screen.appendChild(statNode)
+    stats.appendChild(statNode)
   })
+
+  screen.appendChild(stats)
 }
 
-window.onload = () => {
+const goToSplash = (screen) => {
+  screen.innerHTML = ""
+
+  const splash = document.createElement("div")
+  splash.className = "splash"
+
+  const title = document.createElement("span")
+  title.className = "title"
+  title.textContent = "mm.quest"
+
+  splash.appendChild(title)
+
+  screen.appendChild(splash)
+}
+
+const goToLoader = (screen) => {
+  screen.innerHTML = ""
+
+  const loader = document.createElement("div")
+  loader.className = "loader"
+
+  const quote = document.createElement("div")
+  quote.className = "quote"
+
+  const vanillaSkies = [
+    "it's the little things.",
+    "there's nothing bigger...",
+    "is there?"
+  ]
+
+  vanillaSkies.forEach((line) => {
+    const span = document.createElement("span")
+    span.textContent = line
+    quote.appendChild(span)
+  })
+
+  const loading = document.createElement("span")
+  loading.className = "loading"
+  loading.textContent = "loading journal..."
+
+  loader.appendChild(quote)
+  loader.appendChild(loading)
+
+  screen.appendChild(loader)
+}
+
+const getCurrentWeek = () => {
+  const now = new Date()
+
+  const startOfWeek = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate() - now.getDay()
+  )
+
+  return startOfWeek.getTime()
+}
+
+const resetStats = () => {
+  const currentWeek = getCurrentWeek()
+  statsCache.clear(currentWeek)
+}
+
+window.onload = async () => {
+  resetStats()
+
   const screen = document.getElementById("screen")
+
+  goToSplash(screen)
+
+  await new Promise(resolve => setTimeout(resolve, 1500))
+
+  goToLoader(screen)
+
+  await new Promise(resolve => setTimeout(resolve, 2500))
 
   goToStats(screen)
 }
