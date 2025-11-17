@@ -50,6 +50,9 @@ html, body {
   gap: 0.4em;
   font-family: inherit;
   cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .actions .reset img {
