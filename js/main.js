@@ -82,6 +82,9 @@ const STATS = [
 ]
 
 const statsCache = {
+  currentWeek: () => {
+    return parseInt(localStorage.getItem("state:current-week"))
+  },
   set: (stat, count) => {
     localStorage.setItem(`stat:${stat.id}`, count || 0)
   },
@@ -89,11 +92,6 @@ const statsCache = {
     return parseInt(localStorage.getItem(`stat:${stat.id}`)) || 0
   },
   clear: (currentWeek) => {
-    const storedWeek = parseInt(localStorage.getItem("state:current-week"))
-    if (storedWeek === currentWeek) {
-      return
-    }
-
     localStorage.clear()
     localStorage.setItem("state:current-week", currentWeek)
   }
@@ -218,12 +216,26 @@ const getCurrentWeek = () => {
 
 const resetStats = () => {
   const currentWeek = getCurrentWeek()
+  if (currentWeek == statsCache.currentWeek()) {
+    return
+  }
+
   statsCache.clear(currentWeek)
 }
 
-window.onload = async () => {
-  resetStats()
+const manualReset = async () => {
+  const confirmed = confirm("You sure?")
+  if (!confirmed) {
+    return
+  }
 
+  const currentWeek = getCurrentWeek()
+  statsCache.clear(currentWeek)
+
+  await reloadGame()
+}
+
+const reloadGame = async () => {
   const screen = document.getElementById("screen")
 
   goToSplash(screen)
@@ -235,4 +247,10 @@ window.onload = async () => {
   await new Promise(resolve => setTimeout(resolve, 2500))
 
   goToStats(screen)
+}
+
+window.onload = async () => {
+  resetStats()
+
+  await reloadGame()
 }
