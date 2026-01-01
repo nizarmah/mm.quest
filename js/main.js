@@ -180,10 +180,11 @@ const goToLoader = (screen) => {
   const quote = document.createElement("div")
   quote.className = "quote"
 
-  const vanillaSkies = [
+  const ferrisBueller = [
     "Life moves pretty fast.",
-    "If you don't stop and look around once in a while,",
-    "you could miss it"
+    "If you don't stop and",
+    "look around once in a while,",
+    "you could miss it."
   ]
 
   vanillaSkies.forEach((line) => {
