@@ -184,6 +184,25 @@ const goToYearMap = (screen) => {
     yearMap.appendChild(day)
   }
 
+  const percentComplete = Math.round(((todayIndex + 1) / daysInYear) * 100)
+
+  const info = document.createElement("div")
+  info.className = "year-map-info"
+
+  const text = document.createElement("span")
+  text.textContent = `year is ${percentComplete}% complete`
+
+  const statsLink = document.createElement("button")
+  statsLink.className = "year-map-stats-link"
+  statsLink.textContent = "view stats"
+  statsLink.addEventListener("click", () => {
+    goToStats(screen)
+  })
+
+  info.appendChild(text)
+  info.appendChild(statsLink)
+  yearMap.appendChild(info)
+
   screen.appendChild(yearMap)
 }
 

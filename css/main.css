@@ -149,6 +149,7 @@ html, body {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
+  position: relative;
 }
 
 .year-day {
@@ -170,4 +171,27 @@ html, body {
   background-color: #000000;
   outline: 1px solid #E56262;
   outline-offset: -1px;
+}
+
+.year-map-info {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8em;
+  text-align: center;
+}
+
+.year-map-stats-link {
+  cursor: pointer;
+  color: #E56262;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: 0.8em;
 }
