@@ -138,3 +138,36 @@ html, body {
   align-items: left;
   font-size: 0.5em;
 }
+
+.year-map {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8px, 1fr));
+  grid-auto-rows: minmax(8px, auto);
+  grid-gap: 6px;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.year-day {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #D0D0D0;
+}
+
+.year-day-past {
+  background-color: #000000;
+}
+
+.year-day-future {
+  background-color: #D0D0D0;
+}
+
+.year-day-today {
+  background-color: #000000;
+  outline: 1px solid #E56262;
+  outline-offset: -1px;
+}
