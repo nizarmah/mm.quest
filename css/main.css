@@ -164,6 +164,7 @@ html, body {
 }
 
 .year-day-today {
-  background-color: #000000;
-  border-radius: 0;
+  background-color: transparent;
+  border: 2px solid #000000;
+  border-radius: 50%;
 }
