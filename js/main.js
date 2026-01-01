@@ -181,9 +181,9 @@ const goToLoader = (screen) => {
   quote.className = "quote"
 
   const vanillaSkies = [
-    "it's the little things.",
-    "there's nothing bigger...",
-    "is there?"
+    "Life moves pretty fast.",
+    "If you don't stop and look around once in a while,",
+    "you could miss it"
   ]
 
   vanillaSkies.forEach((line) => {
