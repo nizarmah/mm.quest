@@ -187,7 +187,7 @@ const goToLoader = (screen) => {
     "you could miss it."
   ]
 
-  vanillaSkies.forEach((line) => {
+  ferrisBueller.forEach((line) => {
     const span = document.createElement("span")
     span.textContent = line
     quote.appendChild(span)
