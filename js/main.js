@@ -182,7 +182,6 @@ const goToYearMap = (screen) => {
     }
 
     yearMap.appendChild(day)
-    index++
   }
 
   screen.appendChild(yearMap)
