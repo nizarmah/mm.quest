@@ -145,6 +145,13 @@ const createStatNode = (stat) => {
 const goToStats = (screen) => {
   screen.innerHTML = ""
 
+  const back = document.createElement("div")
+  back.className = "back"
+  back.textContent = "< back"
+  back.addEventListener("click", () => {
+    goToSectionPicker(screen)
+  })
+
   const stats = document.createElement("div")
   stats.className = "stats"
 
@@ -153,7 +160,31 @@ const goToStats = (screen) => {
     stats.appendChild(statNode)
   })
 
+  screen.appendChild(back)
   screen.appendChild(stats)
+}
+
+const goToYearSection = (screen) => {
+  screen.innerHTML = ""
+
+  const back = document.createElement("div")
+  back.className = "back"
+  back.textContent = "< back"
+  back.addEventListener("click", () => {
+    goToSectionPicker(screen)
+  })
+
+  const splash = document.createElement("div")
+  splash.className = "splash"
+
+  const title = document.createElement("span")
+  title.className = "title"
+  title.textContent = "yearly journal"
+
+  splash.appendChild(title)
+
+  screen.appendChild(back)
+  screen.appendChild(splash)
 }
 
 const goToSplash = (screen) => {
@@ -169,6 +200,41 @@ const goToSplash = (screen) => {
   splash.appendChild(title)
 
   screen.appendChild(splash)
+}
+
+const goToSectionPicker = (screen) => {
+  screen.innerHTML = ""
+
+  const picker = document.createElement("div")
+  picker.className = "section-picker"
+
+  const title = document.createElement("span")
+  title.textContent = "choose journal"
+
+  const buttons = document.createElement("div")
+  buttons.className = "section-buttons"
+
+  const weekButton = document.createElement("button")
+  weekButton.className = "section-button"
+  weekButton.textContent = "this week"
+  weekButton.addEventListener("click", () => {
+    goToStats(screen)
+  })
+
+  const yearButton = document.createElement("button")
+  yearButton.className = "section-button"
+  yearButton.textContent = "this year"
+  yearButton.addEventListener("click", () => {
+    goToYearSection(screen)
+  })
+
+  buttons.appendChild(weekButton)
+  buttons.appendChild(yearButton)
+
+  picker.appendChild(title)
+  picker.appendChild(buttons)
+
+  screen.appendChild(picker)
 }
 
 const goToLoader = (screen) => {
@@ -246,7 +312,7 @@ const reloadGame = async () => {
 
   await new Promise(resolve => setTimeout(resolve, 2500))
 
-  goToStats(screen)
+  goToSectionPicker(screen)
 }
 
 window.onload = async () => {

@@ -77,6 +77,40 @@ html, body {
   font-size: 2em;
 }
 
+.section-picker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-size: 1.2em;
+}
+
+.section-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.section-button {
+  padding: 8px 16px;
+  border: 1px solid #E8E8E8;
+  background-color: #FFFFFF;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.9em;
+}
+
+.section-button:hover {
+  background-color: #F0F0F0;
+}
+
+.back {
+  font-size: 0.6em;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
 .loader {
   display: flex;
   flex-direction: column;
