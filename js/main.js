@@ -165,12 +165,11 @@ const goToYearMap = (screen) => {
   const now = new Date()
   const year = now.getFullYear()
   const startOfYear = new Date(year, 0, 1)
-  const startOfNextYear = new Date(year + 1, 0, 1)
   const msPerDay = 24 * 60 * 60 * 1000
-  const todayIndex = Math.floor((now - startOfYear) / msPerDay)
+  const daysInYear = 365
+  const todayIndex = Math.min(Math.floor((now - startOfYear) / msPerDay), daysInYear - 1)
 
-  let index = 0
-  for (let time = startOfYear.getTime(); time < startOfNextYear.getTime(); time += msPerDay) {
+  for (let index = 0; index < daysInYear; index++) {
     const day = document.createElement("div")
     day.className = "year-day"
 
