@@ -180,13 +180,14 @@ const goToLoader = (screen) => {
   const quote = document.createElement("div")
   quote.className = "quote"
 
-  const vanillaSkies = [
-    "it's the little things.",
-    "there's nothing bigger...",
-    "is there?"
+  const ferrisBueller = [
+    "Life moves pretty fast.",
+    "If you don't stop and",
+    "look around once in a while,",
+    "you could miss it."
   ]
 
-  vanillaSkies.forEach((line) => {
+  ferrisBueller.forEach((line) => {
     const span = document.createElement("span")
     span.textContent = line
     quote.appendChild(span)
