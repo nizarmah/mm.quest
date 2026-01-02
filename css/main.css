@@ -152,17 +152,21 @@ html, body {
 .year-day {
   aspect-ratio: 1;
   border-radius: 50%;
-  background-color: #D0D0D0;
+  background-color: transparent;
+  border: none;
 }
 
 .year-day-past {
-  background-color: #000000;
+  background-color: #A5B4FC;
+  border: none;
 }
 
 .year-day-future {
-  background-color: #D0D0D0;
+  background-color: transparent;
+  border: 1px solid #C7D2FE;
 }
 
 .year-day-today {
-  background-color: red;
+  background-color: #4F46E5;
+  border: none;
 }
