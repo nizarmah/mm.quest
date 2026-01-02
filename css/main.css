@@ -157,13 +157,15 @@ html, body {
 }
 
 .year-day-past {
-  background-color: #A5B4FC;
+  background-color: #7D80DA;
   border: none;
+  opacity: 0.85;
 }
 
 .year-day-future {
   background-color: transparent;
-  border: 1px solid #C7D2FE;
+  border: 1px solid #7D80DA;
+  opacity: 0.45;
 }
 
 .year-day-today {
