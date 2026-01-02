@@ -171,4 +171,5 @@ html, body {
 .year-day-today {
   background-color: #7D80DA;
   border: none;
+  box-shadow: 0 0 3px 2px #e8e8e8;
 }
