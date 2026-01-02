@@ -278,7 +278,7 @@ const reloadGame = async () => {
 
   await new Promise(resolve => setTimeout(resolve, 2500))
 
-  goToStats(screen)
+  goToYearMap(screen)
 }
 
 window.onload = async () => {
