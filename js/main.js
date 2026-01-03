@@ -98,14 +98,21 @@ const statsCache = {
 }
 
 const userCache = {
-  hasAge: () => {
+  hasBirthdate: () => {
     return !!localStorage.getItem("user:birthdate")
   },
-  getAge: () => {
-    return localStorage.getItem("user:birthdate")
+  getBirthdate: () => {
+    const value = localStorage.getItem("user:birthdate")
+    if (!value) {
+      return null
+    }
+    const birthdateUnix = parseInt(value, 10)
+    return new Date(birthdateUnix)
   },
-  setAge: (value) => {
-    localStorage.setItem("user:birthdate", value)
+  setBirthdate: (day, month, year) => {
+    const birthdate = new Date(year, month - 1, day)
+    const birthdateUnix = birthdate.getTime()
+    localStorage.setItem("user:birthdate", birthdateUnix)
   },
   clear: () => {
     localStorage.removeItem("user:birthdate")
@@ -255,15 +262,13 @@ const goToAge = (screen) => {
     const monthNumber = parseInt(month, 10)
     const dayNumber = parseInt(day, 10)
     const yearNumber = parseInt(year, 10)
-    const birthdate = new Date(yearNumber, monthNumber - 1, dayNumber)
-    const birthdateUnix = birthdate.getTime()
 
-    if (Number.isNaN(birthdateUnix)) {
+    if (Number.isNaN(monthNumber) || Number.isNaN(dayNumber) || Number.isNaN(yearNumber)) {
       await manualReset()
       return
     }
 
-    userCache.setAge(birthdateUnix)
+    userCache.setBirthdate(dayNumber, monthNumber, yearNumber)
     await startMainFlow(screen)
   }
 
@@ -388,7 +393,7 @@ const reloadGame = async () => {
 
   await new Promise(resolve => setTimeout(resolve, 1500))
 
-  if (userCache.hasAge()) {
+  if (userCache.hasBirthdate()) {
     await startMainFlow(screen)
   } else {
     goToAge(screen)
