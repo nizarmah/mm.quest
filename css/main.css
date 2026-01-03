@@ -194,13 +194,13 @@ html, body {
 .lifetime-week-past {
   background-color: #7D80DA;
   border: none;
-  opacity: 0.25;
+  opacity: 0.2;
 }
 
 .lifetime-week-future {
   background-color: #7D80DA;
   border: none;
-  opacity: 0.25;
+  opacity: 0.2;
 }
 
 .lifetime-week-today {
