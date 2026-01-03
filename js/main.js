@@ -178,37 +178,6 @@ const goToStats = (screen) => {
   screen.appendChild(stats)
 }
 
-const goToYearMap = (screen) => {
-  screen.innerHTML = ""
-
-  const yearMap = document.createElement("div")
-  yearMap.className = "year-map"
-
-  const now = new Date()
-  const year = now.getFullYear()
-  const startOfYear = new Date(year, 0, 1)
-  const msPerDay = 24 * 60 * 60 * 1000
-  const daysInYear = 365
-  const todayIndex = Math.min(Math.floor((now - startOfYear) / msPerDay), daysInYear - 1)
-
-  for (let index = 0; index < daysInYear; index++) {
-    const day = document.createElement("div")
-    day.className = "year-day"
-
-    if (index < todayIndex) {
-      day.classList.add("year-day-past")
-    } else if (index > todayIndex) {
-      day.classList.add("year-day-future")
-    } else {
-      day.classList.add("year-day-today")
-    }
-
-    yearMap.appendChild(day)
-  }
-
-  screen.appendChild(yearMap)
-}
-
 const goToLifetimeMap = (screen) => {
   screen.innerHTML = ""
 
