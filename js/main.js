@@ -106,6 +106,9 @@ const userCache = {
   },
   setAge: (value) => {
     localStorage.setItem("user:age", value)
+  },
+  clear: () => {
+    localStorage.removeItem("user:age")
   }
 }
 
@@ -343,6 +346,7 @@ const manualReset = async () => {
 
   const currentWeek = getCurrentWeek()
   statsCache.clear(currentWeek)
+  userCache.clear()
 
   await reloadGame()
 }
