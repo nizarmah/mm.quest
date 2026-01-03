@@ -234,17 +234,17 @@ const goToAge = (screen) => {
 
   const monthInput = document.createElement("input")
   monthInput.className = "age-input"
-  monthInput.type = "text"
+  monthInput.type = "number"
   monthInput.placeholder = "MM"
 
   const dayInput = document.createElement("input")
   dayInput.className = "age-input"
-  dayInput.type = "text"
+  dayInput.type = "number"
   dayInput.placeholder = "DD"
 
   const yearInput = document.createElement("input")
   yearInput.className = "age-input"
-  yearInput.type = "text"
+  yearInput.type = "number"
   yearInput.placeholder = "YYYY"
 
   const button = document.createElement("button")
@@ -263,31 +263,11 @@ const goToAge = (screen) => {
     const dayNumber = parseInt(day, 10)
     const yearNumber = parseInt(year, 10)
 
-    if (Number.isNaN(monthNumber) || Number.isNaN(dayNumber) || Number.isNaN(yearNumber)) {
-      await manualReset()
-      return
-    }
-
     userCache.setBirthdate(dayNumber, monthNumber, yearNumber)
     await startMainFlow(screen)
   }
 
   button.addEventListener("click", onSubmit)
-  monthInput.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      onSubmit()
-    }
-  })
-  dayInput.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      onSubmit()
-    }
-  })
-  yearInput.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      onSubmit()
-    }
-  })
 
   ageScreen.appendChild(monthInput)
   ageScreen.appendChild(dayInput)
