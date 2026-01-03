@@ -270,15 +270,7 @@ const goToBirthdate = (screen) => {
     const yearNumber = parseInt(year, 10)
 
     userCache.setBirthdate(dayNumber, monthNumber, yearNumber)
-    goToLoader(screen)
-
-    await new Promise(resolve => setTimeout(resolve, 2500))
-
-    if (userCache.hasBirthdate()) {
-      goToYearMap(screen)
-    } else {
-      goToBirthdate(screen)
-    }
+    await reloadGame()
   }
 
   button.addEventListener("click", onSubmit)
