@@ -97,6 +97,18 @@ const statsCache = {
   }
 }
 
+const userCache = {
+  hasAge: () => {
+    return !!localStorage.getItem("user:age")
+  },
+  getAge: () => {
+    return localStorage.getItem("user:age")
+  },
+  setAge: (value) => {
+    localStorage.setItem("user:age", value)
+  }
+}
+
 const incrementStat = (stat) => {
   const count = parseInt(statsCache.get(stat))
   statsCache.set(stat, count + 1)
@@ -204,6 +216,49 @@ const goToLifetimeMap = (screen) => {
   screen.appendChild(lifetimeMap)
 }
 
+const goToAge = (screen) => {
+  screen.innerHTML = ""
+
+  const ageScreen = document.createElement("div")
+  ageScreen.className = "age-screen"
+
+  const prompt = document.createElement("div")
+  prompt.className = "age-prompt"
+  prompt.textContent = "Enter your age (MM / DD / YYYY)"
+
+  const input = document.createElement("input")
+  input.className = "age-input"
+  input.type = "text"
+  input.placeholder = "MM / DD / YYYY"
+
+  const button = document.createElement("button")
+  button.className = "age-submit"
+  button.textContent = "continue"
+
+  const onSubmit = async () => {
+    const value = input.value.trim()
+    if (!value) {
+      return
+    }
+
+    userCache.setAge(value)
+    await startMainFlow(screen)
+  }
+
+  button.addEventListener("click", onSubmit)
+  input.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      onSubmit()
+    }
+  })
+
+  ageScreen.appendChild(prompt)
+  ageScreen.appendChild(input)
+  ageScreen.appendChild(button)
+
+  screen.appendChild(ageScreen)
+}
+
 const goToSplash = (screen) => {
   screen.innerHTML = ""
 
@@ -251,6 +306,14 @@ const goToLoader = (screen) => {
   screen.appendChild(loader)
 }
 
+const startMainFlow = async (screen) => {
+  goToLoader(screen)
+
+  await new Promise(resolve => setTimeout(resolve, 2500))
+
+  goToYearMap(screen)
+}
+
 const getCurrentWeek = () => {
   const now = new Date()
 
@@ -291,11 +354,11 @@ const reloadGame = async () => {
 
   await new Promise(resolve => setTimeout(resolve, 1500))
 
-  goToLoader(screen)
-
-  await new Promise(resolve => setTimeout(resolve, 2500))
-
-  goToYearMap(screen)
+  if (userCache.hasAge()) {
+    await startMainFlow(screen)
+  } else {
+    goToAge(screen)
+  }
 }
 
 window.onload = async () => {

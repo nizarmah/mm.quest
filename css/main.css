@@ -191,3 +191,29 @@ html, body {
   border: none;
   opacity: 0.25;
 }
+
+.age-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 1.2em;
+}
+
+.age-prompt {
+  text-align: center;
+}
+
+.age-input {
+  padding: 4px 8px;
+  font-family: inherit;
+  font-size: 1em;
+}
+
+.age-submit {
+  padding: 4px 8px;
+  font-family: inherit;
+  font-size: 0.8em;
+  cursor: pointer;
+}
