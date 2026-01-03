@@ -99,16 +99,16 @@ const statsCache = {
 
 const userCache = {
   hasAge: () => {
-    return !!localStorage.getItem("user:age")
+    return !!localStorage.getItem("user:birthdate")
   },
   getAge: () => {
-    return localStorage.getItem("user:age")
+    return localStorage.getItem("user:birthdate")
   },
   setAge: (value) => {
-    localStorage.setItem("user:age", value)
+    localStorage.setItem("user:birthdate", value)
   },
   clear: () => {
-    localStorage.removeItem("user:age")
+    localStorage.removeItem("user:birthdate")
   }
 }
 
@@ -252,8 +252,18 @@ const goToAge = (screen) => {
       return
     }
 
-    const value = `${month} / ${day} / ${year}`
-    userCache.setAge(value)
+    const monthNumber = parseInt(month, 10)
+    const dayNumber = parseInt(day, 10)
+    const yearNumber = parseInt(year, 10)
+    const birthdate = new Date(yearNumber, monthNumber - 1, dayNumber)
+    const birthdateUnix = birthdate.getTime()
+
+    if (Number.isNaN(birthdateUnix)) {
+      await manualReset()
+      return
+    }
+
+    userCache.setAge(birthdateUnix)
     await startMainFlow(screen)
   }
 
