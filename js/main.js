@@ -215,11 +215,29 @@ const goToLifetimeMap = (screen) => {
   const lifetimeMap = document.createElement("div")
   lifetimeMap.className = "lifetime-map"
 
+  const birthdate = userCache.getBirthdate()
+  const now = new Date()
+  const msPerWeek = 7 * 24 * 60 * 60 * 1000
   const weeksInLifetime = 73 * 52
+
+  let currentWeekIndex = Math.floor((now - birthdate) / msPerWeek)
+  if (isNaN(currentWeekIndex)) {
+    currentWeekIndex = 0
+  }
+  currentWeekIndex = Math.max(0, Math.min(currentWeekIndex, weeksInLifetime - 1))
 
   for (let index = 0; index < weeksInLifetime; index++) {
     const week = document.createElement("div")
     week.className = "lifetime-week"
+
+    if (index < currentWeekIndex) {
+      week.classList.add("year-day-past")
+    } else if (index > currentWeekIndex) {
+      week.classList.add("year-day-future")
+    } else {
+      week.classList.add("year-day-today")
+    }
+
     lifetimeMap.appendChild(week)
   }
 
@@ -376,7 +394,7 @@ const reloadGame = async () => {
   await new Promise(resolve => setTimeout(resolve, 2500))
 
   if (userCache.hasBirthdate()) {
-    goToYearMap(screen)
+    goToLifetimeMap(screen)
   } else {
     goToBirthdate(screen)
   }
