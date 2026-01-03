@@ -270,7 +270,15 @@ const goToBirthdate = (screen) => {
     const yearNumber = parseInt(year, 10)
 
     userCache.setBirthdate(dayNumber, monthNumber, yearNumber)
-    await startMainFlow(screen)
+    goToLoader(screen)
+
+    await new Promise(resolve => setTimeout(resolve, 2500))
+
+    if (userCache.hasBirthdate()) {
+      goToYearMap(screen)
+    } else {
+      goToBirthdate(screen)
+    }
   }
 
   button.addEventListener("click", onSubmit)
@@ -330,18 +338,6 @@ const goToLoader = (screen) => {
   screen.appendChild(loader)
 }
 
-const startMainFlow = async (screen) => {
-  goToLoader(screen)
-
-  await new Promise(resolve => setTimeout(resolve, 2500))
-
-  if (userCache.hasBirthdate()) {
-    goToYearMap(screen)
-  } else {
-    goToBirthdate(screen)
-  }
-}
-
 const getCurrentWeek = () => {
   const now = new Date()
 
@@ -383,7 +379,15 @@ const reloadGame = async () => {
 
   await new Promise(resolve => setTimeout(resolve, 1500))
 
-  await startMainFlow(screen)
+  goToLoader(screen)
+
+  await new Promise(resolve => setTimeout(resolve, 2500))
+
+  if (userCache.hasBirthdate()) {
+    goToYearMap(screen)
+  } else {
+    goToBirthdate(screen)
+  }
 }
 
 window.onload = async () => {
