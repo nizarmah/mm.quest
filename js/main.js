@@ -199,8 +199,8 @@ const goToLifetimeMap = (screen) => {
     const week = document.createElement("div")
     week.className = "lifetime-week"
 
-		    if (index === currentWeekIndex) {
-		      week.classList.add("lifetime-week-today"); week.style.cursor = "pointer"
+			    if (index === currentWeekIndex) {
+			      week.classList.add("lifetime-week-today")
 	      week.addEventListener("click", () => {
 	        goToStats(screen)
 	      })
