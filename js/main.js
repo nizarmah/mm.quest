@@ -225,38 +225,58 @@ const goToAge = (screen) => {
   const ageScreen = document.createElement("div")
   ageScreen.className = "age-screen"
 
-  const prompt = document.createElement("div")
-  prompt.className = "age-prompt"
-  prompt.textContent = "Enter your age (MM / DD / YYYY)"
+  const monthInput = document.createElement("input")
+  monthInput.className = "age-input"
+  monthInput.type = "text"
+  monthInput.placeholder = "MM"
 
-  const input = document.createElement("input")
-  input.className = "age-input"
-  input.type = "text"
-  input.placeholder = "MM / DD / YYYY"
+  const dayInput = document.createElement("input")
+  dayInput.className = "age-input"
+  dayInput.type = "text"
+  dayInput.placeholder = "DD"
+
+  const yearInput = document.createElement("input")
+  yearInput.className = "age-input"
+  yearInput.type = "text"
+  yearInput.placeholder = "YYYY"
 
   const button = document.createElement("button")
   button.className = "age-submit"
   button.textContent = "continue"
 
   const onSubmit = async () => {
-    const value = input.value.trim()
-    if (!value) {
+    const month = monthInput.value.trim()
+    const day = dayInput.value.trim()
+    const year = yearInput.value.trim()
+    if (!month || !day || !year) {
       return
     }
 
+    const value = `${month} / ${day} / ${year}`
     userCache.setAge(value)
     await startMainFlow(screen)
   }
 
   button.addEventListener("click", onSubmit)
-  input.addEventListener("keydown", (event) => {
+  monthInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      onSubmit()
+    }
+  })
+  dayInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      onSubmit()
+    }
+  })
+  yearInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       onSubmit()
     }
   })
 
-  ageScreen.appendChild(prompt)
-  ageScreen.appendChild(input)
+  ageScreen.appendChild(monthInput)
+  ageScreen.appendChild(dayInput)
+  ageScreen.appendChild(yearInput)
   ageScreen.appendChild(button)
 
   screen.appendChild(ageScreen)
