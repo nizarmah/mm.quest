@@ -236,16 +236,22 @@ const goToAge = (screen) => {
   monthInput.className = "age-input"
   monthInput.type = "number"
   monthInput.placeholder = "MM"
+  monthInput.min = "1"
+  monthInput.max = "12"
 
   const dayInput = document.createElement("input")
   dayInput.className = "age-input"
   dayInput.type = "number"
   dayInput.placeholder = "DD"
+  dayInput.min = "1"
+  dayInput.max = "31"
 
   const yearInput = document.createElement("input")
   yearInput.className = "age-input"
   yearInput.type = "number"
   yearInput.placeholder = "YYYY"
+  yearInput.min = "1900"
+  yearInput.max = new Date().getFullYear().toString()
 
   const button = document.createElement("button")
   button.className = "age-submit"
