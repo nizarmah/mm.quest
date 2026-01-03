@@ -97,6 +97,28 @@ const statsCache = {
   }
 }
 
+const userCache = {
+  hasBirthdate: () => {
+    return !!localStorage.getItem("user:birthdate")
+  },
+  getBirthdate: () => {
+    const value = localStorage.getItem("user:birthdate")
+    if (!value) {
+      return null
+    }
+    const birthdateUnix = parseInt(value, 10)
+    return new Date(birthdateUnix)
+  },
+  setBirthdate: (day, month, year) => {
+    const birthdate = new Date(year, month - 1, day)
+    const birthdateUnix = birthdate.getTime()
+    localStorage.setItem("user:birthdate", birthdateUnix)
+  },
+  clear: () => {
+    localStorage.removeItem("user:birthdate")
+  }
+}
+
 const incrementStat = (stat) => {
   const count = parseInt(statsCache.get(stat))
   statsCache.set(stat, count + 1)
@@ -204,6 +226,63 @@ const goToLifetimeMap = (screen) => {
   screen.appendChild(lifetimeMap)
 }
 
+const goToBirthdate = (screen) => {
+  screen.innerHTML = ""
+
+  const birthdateScreen = document.createElement("div")
+  birthdateScreen.className = "birthdate-screen"
+
+  const monthInput = document.createElement("input")
+  monthInput.className = "birthdate-input"
+  monthInput.type = "number"
+  monthInput.placeholder = "MM"
+  monthInput.min = "1"
+  monthInput.max = "12"
+
+  const dayInput = document.createElement("input")
+  dayInput.className = "birthdate-input"
+  dayInput.type = "number"
+  dayInput.placeholder = "DD"
+  dayInput.min = "1"
+  dayInput.max = "31"
+
+  const yearInput = document.createElement("input")
+  yearInput.className = "birthdate-input"
+  yearInput.type = "number"
+  yearInput.placeholder = "YYYY"
+  yearInput.min = "1900"
+  yearInput.max = new Date().getFullYear().toString()
+
+  const button = document.createElement("button")
+  button.className = "birthdate-submit"
+  button.textContent = "continue"
+
+  const onSubmit = async () => {
+    const month = monthInput.value.trim()
+    const day = dayInput.value.trim()
+    const year = yearInput.value.trim()
+    if (!month || !day || !year) {
+      return
+    }
+
+    const monthNumber = parseInt(month, 10)
+    const dayNumber = parseInt(day, 10)
+    const yearNumber = parseInt(year, 10)
+
+    userCache.setBirthdate(dayNumber, monthNumber, yearNumber)
+    await reloadGame()
+  }
+
+  button.addEventListener("click", onSubmit)
+
+  birthdateScreen.appendChild(monthInput)
+  birthdateScreen.appendChild(dayInput)
+  birthdateScreen.appendChild(yearInput)
+  birthdateScreen.appendChild(button)
+
+  screen.appendChild(birthdateScreen)
+}
+
 const goToSplash = (screen) => {
   screen.innerHTML = ""
 
@@ -280,6 +359,7 @@ const manualReset = async () => {
 
   const currentWeek = getCurrentWeek()
   statsCache.clear(currentWeek)
+  userCache.clear()
 
   await reloadGame()
 }
@@ -295,7 +375,11 @@ const reloadGame = async () => {
 
   await new Promise(resolve => setTimeout(resolve, 2500))
 
-  goToYearMap(screen)
+  if (userCache.hasBirthdate()) {
+    goToYearMap(screen)
+  } else {
+    goToBirthdate(screen)
+  }
 }
 
 window.onload = async () => {
