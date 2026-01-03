@@ -34,8 +34,21 @@ html, body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: end;
+  justify-content: space-between;
   padding: 12px;
+}
+
+.actions .back {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: #444444;
+  font-size: 0.8em;
+  gap: 0.4em;
+  font-family: inherit;
+  cursor: pointer;
+  appearance: none;
 }
 
 .actions .reset {

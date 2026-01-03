@@ -201,6 +201,9 @@ const goToLifetimeMap = (screen) => {
 
 	    if (index === currentWeekIndex) {
 	      week.classList.add("lifetime-week-today")
+	      week.addEventListener("click", () => {
+	        goToStats(screen)
+	      })
 	    } else if (index < currentWeekIndex) {
 	      week.classList.add("lifetime-week-past")
 	    } else {
@@ -371,6 +374,10 @@ const reloadGame = async () => {
 
 window.onload = async () => {
   document.getElementById("reset").addEventListener("click", manualReset)
+  document.getElementById("back").addEventListener("click", () => {
+    const screen = document.getElementById("screen")
+    goToLifetimeMap(screen)
+  })
 
   resetStats()
 
