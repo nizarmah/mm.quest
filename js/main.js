@@ -187,6 +187,23 @@ const goToYearMap = (screen) => {
   screen.appendChild(yearMap)
 }
 
+const goToLifetimeMap = (screen) => {
+  screen.innerHTML = ""
+
+  const lifetimeMap = document.createElement("div")
+  lifetimeMap.className = "lifetime-map"
+
+  const weeksInLifetime = 73 * 52
+
+  for (let index = 0; index < weeksInLifetime; index++) {
+    const week = document.createElement("div")
+    week.className = "lifetime-week"
+    lifetimeMap.appendChild(week)
+  }
+
+  screen.appendChild(lifetimeMap)
+}
+
 const goToSplash = (screen) => {
   screen.innerHTML = ""
 
