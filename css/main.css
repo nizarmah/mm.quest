@@ -187,8 +187,26 @@ html, body {
 .lifetime-week {
   aspect-ratio: 1;
   border-radius: 50%;
+  background-color: transparent;
+  border: none;
+}
+
+.lifetime-week-past {
   background-color: #7D80DA;
   border: none;
+  opacity: 0.25;
+}
+
+.lifetime-week-future {
+  background-color: #7D80DA;
+  border: none;
+  opacity: 0.25;
+}
+
+.lifetime-week-today {
+  background-color: #7D80DA;
+  border: none;
+  box-shadow: 0 0 3px 2px #e8e8e8;
   opacity: 0.25;
 }
 
