@@ -230,12 +230,12 @@ const goToLifetimeMap = (screen) => {
     const week = document.createElement("div")
     week.className = "lifetime-week"
 
-    if (index < currentWeekIndex) {
-      week.classList.add("year-day-past")
-    } else if (index > currentWeekIndex) {
-      week.classList.add("year-day-future")
-    } else {
+    if (index === currentWeekIndex) {
       week.classList.add("year-day-today")
+    } else if (index < currentWeekIndex) {
+      week.classList.add("year-day-past")
+    } else {
+      week.classList.add("year-day-future")
     }
 
     lifetimeMap.appendChild(week)
