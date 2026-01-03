@@ -192,7 +192,7 @@ html, body {
   opacity: 0.25;
 }
 
-.age-screen {
+.birthdate-screen {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -201,17 +201,19 @@ html, body {
   font-size: 1.2em;
 }
 
-.age-prompt {
+.birthdate-prompt {
   text-align: center;
 }
 
-.age-input {
+.birthdate-input {
   padding: 4px 8px;
   font-family: inherit;
   font-size: 1em;
+  width: 4ch;
+  text-align: left;
 }
 
-.age-submit {
+.birthdate-submit {
   padding: 4px 8px;
   font-family: inherit;
   font-size: 0.8em;

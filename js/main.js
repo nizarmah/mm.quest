@@ -226,35 +226,35 @@ const goToLifetimeMap = (screen) => {
   screen.appendChild(lifetimeMap)
 }
 
-const goToAge = (screen) => {
+const goToBirthdate = (screen) => {
   screen.innerHTML = ""
 
-  const ageScreen = document.createElement("div")
-  ageScreen.className = "age-screen"
+  const birthdateScreen = document.createElement("div")
+  birthdateScreen.className = "birthdate-screen"
 
   const monthInput = document.createElement("input")
-  monthInput.className = "age-input"
+  monthInput.className = "birthdate-input"
   monthInput.type = "number"
   monthInput.placeholder = "MM"
   monthInput.min = "1"
   monthInput.max = "12"
 
   const dayInput = document.createElement("input")
-  dayInput.className = "age-input"
+  dayInput.className = "birthdate-input"
   dayInput.type = "number"
   dayInput.placeholder = "DD"
   dayInput.min = "1"
   dayInput.max = "31"
 
   const yearInput = document.createElement("input")
-  yearInput.className = "age-input"
+  yearInput.className = "birthdate-input"
   yearInput.type = "number"
   yearInput.placeholder = "YYYY"
   yearInput.min = "1900"
   yearInput.max = new Date().getFullYear().toString()
 
   const button = document.createElement("button")
-  button.className = "age-submit"
+  button.className = "birthdate-submit"
   button.textContent = "continue"
 
   const onSubmit = async () => {
@@ -275,12 +275,12 @@ const goToAge = (screen) => {
 
   button.addEventListener("click", onSubmit)
 
-  ageScreen.appendChild(monthInput)
-  ageScreen.appendChild(dayInput)
-  ageScreen.appendChild(yearInput)
-  ageScreen.appendChild(button)
+  birthdateScreen.appendChild(monthInput)
+  birthdateScreen.appendChild(dayInput)
+  birthdateScreen.appendChild(yearInput)
+  birthdateScreen.appendChild(button)
 
-  screen.appendChild(ageScreen)
+  screen.appendChild(birthdateScreen)
 }
 
 const goToSplash = (screen) => {
@@ -335,7 +335,11 @@ const startMainFlow = async (screen) => {
 
   await new Promise(resolve => setTimeout(resolve, 2500))
 
-  goToYearMap(screen)
+  if (userCache.hasBirthdate()) {
+    goToYearMap(screen)
+  } else {
+    goToBirthdate(screen)
+  }
 }
 
 const getCurrentWeek = () => {
@@ -379,11 +383,7 @@ const reloadGame = async () => {
 
   await new Promise(resolve => setTimeout(resolve, 1500))
 
-  if (userCache.hasBirthdate()) {
-    await startMainFlow(screen)
-  } else {
-    goToAge(screen)
-  }
+  await startMainFlow(screen)
 }
 
 window.onload = async () => {
