@@ -64,6 +64,11 @@ html, body {
   appearance: none;
 }
 
+.actions .back img {
+  width: 0.5em;
+  height: 0.5em;
+}
+
 .actions .reset img {
   width: 0.5em;
   height: 0.5em;
